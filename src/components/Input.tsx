@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import styled from "styled-components";
-import { ACTIONS, newTodo } from "../reducers/todosReducer";
+import { ACTIONS } from "../reducers/todosReducer";
 
 const StyledInput = styled.input`
   width: 300px;
+  padding: 15px;
 `;
 
 const SubmitButton = styled.button``;
@@ -16,9 +17,12 @@ const Input = (props: any) => {
     setName("");
     dispatch({
       type: ACTIONS.ADD_TODO,
-      payload: newTodo({ name }),
+      payload: { name },
     });
   };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLElement>) =>
+    e.key === "Enter" && handleSubmit();
 
   return (
     <>
@@ -26,6 +30,7 @@ const Input = (props: any) => {
         placeholder="What's your todo?"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <SubmitButton disabled={!name} onClick={handleSubmit}>
         Add
