@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { ACTIONS, newTodo } from "../reducers/todosReducer";
 
 const StyledInput = styled.input`
   width: 300px;
@@ -8,22 +9,27 @@ const StyledInput = styled.input`
 const SubmitButton = styled.button``;
 
 const Input = (props: any) => {
-  const [input, setInput] = useState("");
+  const [name, setName] = useState<string>("");
   const { dispatch } = props;
 
   const handleSubmit = () => {
-    setInput('')
-    dispatch({ type: 'TODO_ADDED', payload: input })
-  }
+    setName("");
+    dispatch({
+      type: ACTIONS.ADD_TODO,
+      payload: newTodo({ name }),
+    });
+  };
 
   return (
     <>
       <StyledInput
         placeholder="What's your todo?"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      <SubmitButton disabled={!input} onClick={handleSubmit}>Add</SubmitButton>
+      <SubmitButton disabled={!name} onClick={handleSubmit}>
+        Add
+      </SubmitButton>
     </>
   );
 };
