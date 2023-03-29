@@ -7,12 +7,13 @@ const StyledInput = styled.input`
 
 const SubmitButton = styled.button``;
 
-const Input = () => {
+const Input = (props: any) => {
   const [input, setInput] = useState("");
+  const { dispatch } = props;
 
   const handleSubmit = () => {
     setInput('')
-    console.log(`todo: ${input} added!`)
+    dispatch({ type: 'TODO_ADDED', payload: input })
   }
 
   return (
