@@ -14,12 +14,13 @@ export const reducer = (todos: any, action: any) => {
     case ACTIONS.DELETE_TODO:
       return todos.filter((todo: TodoType) => todo.id !== action.payload.id);
     case ACTIONS.TOGGLE_TODO:
-      return todos.map(
-        (todo: TodoType) =>
-          todo.id === action.payload.id && {
-            ...todo,
-            isComplete: !todo.isComplete,
-          }
+      return todos.map((todo: TodoType) =>
+        todo.id === action.payload.id
+          ? {
+              ...todo,
+              isComplete: !todo.isComplete,
+            }
+          : todo
       );
 
     default:

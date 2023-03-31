@@ -1,13 +1,7 @@
 import { KeyboardEvent, useState } from "react";
-import styled from "styled-components";
 import { ACTIONS } from "../reducers/todosReducer";
-
-const StyledInput = styled.input`
-  width: 300px;
-  padding: 15px;
-`;
-
-const SubmitButton = styled.button``;
+import { PrimaryButton } from "./ui/Button";
+import { Input as InputField } from "./ui/Input";
 
 const Input = (props: any) => {
   const [name, setName] = useState<string>("");
@@ -21,20 +15,20 @@ const Input = (props: any) => {
     });
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLElement>) =>
-    e.key === "Enter" && handleSubmit();
+  const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && handleSubmit();
 
   return (
     <>
-      <StyledInput
+      <InputField
         placeholder="What's your todo?"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e: any) => setName(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <SubmitButton disabled={!name} onClick={handleSubmit}>
+      &nbsp;
+      <PrimaryButton disabled={!name} onClick={handleSubmit}>
         Add
-      </SubmitButton>
+      </PrimaryButton>
     </>
   );
 };

@@ -1,36 +1,31 @@
 import styled from "styled-components";
 import { ACTIONS } from "../../reducers/todosReducer";
+import { WarningButton, DangerButton } from "../ui/Button";
+import { Spacing } from "../ui/Spacing";
 
-const Button = styled.button<{ color: string }>`
-  background-color: ${(props) => props.color};
-  margin: 0 1rem;
-`;
-
-const Container = styled.div`
+const Container = styled.span`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const Text = styled.div<{ isComplete: boolean }>`
-  color: ${(props) => (props.isComplete ? "grey" : "black")};
+const TodoText = styled.p<{ isComplete: boolean }>`
+  ${(props) => props.isComplete && "text-decoration: line-through"};
 `;
 
 const Todo = ({ name, id, isComplete, dispatch }: any) => {
+  const deleteTodo = (id: string) => dispatch({ type: ACTIONS.DELETE_TODO, payload: { id } });
+  const toggleTodo = (id: string) => dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id } });
+
   return (
     <Container>
-      <Text isComplete={isComplete}>{name}</Text>
-      <Button
-        onClick={() => dispatch({ type: ACTIONS.DELETE_TODO, payload: { id } })}
-        color="red"
-      >
-        Delete
-      </Button>
-      <Button
-        onClick={() => dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id } })}
-        color="green"
-      >
-        Toggle
-      </Button>
+      <TodoText isComplete={isComplete}>{name}</TodoText>
+      <div>
+        <DangerButton onClick={() => deleteTodo(id)}>Delete</DangerButton>
+        &nbsp;
+        <WarningButton onClick={() => toggleTodo(id)}>Toggle</WarningButton>
+      </div>
     </Container>
   );
 };
