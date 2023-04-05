@@ -1,17 +1,19 @@
+import React from "react";
 import { KeyboardEvent, useState } from "react";
-import { ACTIONS } from "../reducers/todosReducer";
+import { ACTIONS, ActionType } from "../reducers/todosReducer";
 import { PrimaryButton } from "./ui/Button";
 import { Input as InputField } from "./ui/Input";
 
-const Input = (props: any) => {
+export type Dispatch = { dispatch: React.Dispatch<ActionType> }
+
+const Input = ({ dispatch }: Dispatch) => {
   const [name, setName] = useState<string>("");
-  const { dispatch } = props;
 
   const handleSubmit = () => {
     setName("");
     dispatch({
       type: ACTIONS.ADD_TODO,
-      payload: { name },
+      payload: name,
     });
   };
 
@@ -22,7 +24,7 @@ const Input = (props: any) => {
       <InputField
         placeholder="What's your todo?"
         value={name}
-        onChange={(e: any) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
         onKeyDown={handleKeyDown}
       />
       &nbsp;

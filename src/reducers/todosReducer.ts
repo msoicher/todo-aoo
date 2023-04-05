@@ -7,28 +7,32 @@ export const ACTIONS = {
   TOGGLE_TODO: "toggle-todo",
 };
 
-export const reducer = (todos: any, action: any) => {
+export type ActionType = {
+  type: string;
+  payload: string
+};
+
+export const reducer = (todos: TodoType[], action: ActionType): TodoType[] => {
   switch (action.type) {
     case ACTIONS.ADD_TODO:
-      return [...todos, newTodo(action.payload.name)];
+      return [...todos, newTodo(action.payload)];
     case ACTIONS.DELETE_TODO:
-      return todos.filter((todo: TodoType) => todo.id !== action.payload.id);
+      return todos.filter((todo: TodoType) => todo.id !== action.payload);
     case ACTIONS.TOGGLE_TODO:
       return todos.map((todo: TodoType) =>
-        todo.id === action.payload.id
+        todo.id === action.payload
           ? {
               ...todo,
               isComplete: !todo.isComplete,
             }
           : todo
       );
-
     default:
       return todos;
   }
 };
 
-export const newTodo = (name: string) => ({
+export const newTodo = (name: string): TodoType => ({
   name,
   isComplete: false,
   id: getUniqueId(),
