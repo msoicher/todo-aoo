@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { ACTIONS } from "../../reducers/todosReducer";
-import { Dispatch } from "../Input";
+import { ACTIONS, DispatchType } from "../../reducers/todosReducer";
 import { WarningButton, DangerButton } from "../ui/Button";
 import { TodoType } from "./types";
 
@@ -15,7 +14,7 @@ const TodoText = styled.p<{ isComplete: boolean }>`
   ${(props) => props.isComplete && "text-decoration: line-through"};
 `;
 
-const Todo = ({ name, id, isComplete, dispatch }: TodoType & Dispatch) => {
+const Todo = ({ name, id, isComplete, dispatch }: TodoType & DispatchType) => {
   const deleteTodo = (id: string) => dispatch({ type: ACTIONS.DELETE_TODO, payload: id });
   const toggleTodo = (id: string) => dispatch({ type: ACTIONS.TOGGLE_TODO, payload: id });
 

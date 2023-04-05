@@ -7,10 +7,14 @@ export const ACTIONS = {
   TOGGLE_TODO: "toggle-todo",
 };
 
+type valueof<T> = T[keyof T];
+
 export type ActionType = {
-  type: string;
-  payload: string
+  type: valueof<typeof ACTIONS>;
+  payload: string;
 };
+
+export type DispatchType = { dispatch: React.Dispatch<ActionType> };
 
 export const reducer = (todos: TodoType[], action: ActionType): TodoType[] => {
   switch (action.type) {

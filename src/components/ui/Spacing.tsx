@@ -10,13 +10,7 @@ const spacingMap = {
   "x-large": "64px",
 };
 
-type SpacingType =
-  | "xx-small"
-  | "x-small"
-  | "small"
-  | "medium"
-  | "large"
-  | "x-large";
+type SpacingType = "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large";
 
 type SpacingProps = {
   top?: SpacingType;

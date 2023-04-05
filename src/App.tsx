@@ -27,7 +27,7 @@ const App = () => {
 
   const getTodosComplete = useMemo(() => {
     const todosComplete = todos.filter((todo: TodoType) => todo.isComplete).length;
-    return `Completed ${todosComplete} of ${todos.length}`
+    return `Completed ${todosComplete} of ${todos.length}`;
   }, [todos]);
 
   return (

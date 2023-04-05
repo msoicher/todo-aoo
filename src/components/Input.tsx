@@ -1,12 +1,9 @@
-import React from "react";
 import { KeyboardEvent, useState } from "react";
-import { ACTIONS, ActionType } from "../reducers/todosReducer";
+import { ACTIONS, DispatchType } from "../reducers/todosReducer";
 import { PrimaryButton } from "./ui/Button";
 import { Input as InputField } from "./ui/Input";
 
-export type Dispatch = { dispatch: React.Dispatch<ActionType> }
-
-const Input = ({ dispatch }: Dispatch) => {
+const Input = ({ dispatch }: DispatchType) => {
   const [name, setName] = useState<string>("");
 
   const handleSubmit = () => {
