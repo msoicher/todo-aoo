@@ -16,7 +16,7 @@ export type ActionType = {
 
 export type DispatchType = { dispatch: React.Dispatch<ActionType> };
 
-export const reducer = (todos: TodoType[], action: ActionType): TodoType[] => {
+export const todosReducer = (todos: TodoType[] = [], action: ActionType) => {
   switch (action.type) {
     case ACTIONS.ADD_TODO:
       return [...todos, newTodo(action.payload)];
